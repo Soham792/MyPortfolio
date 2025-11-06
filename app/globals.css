@@ -1,0 +1,273 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.03 0.015 240);
+  --foreground: oklch(0.98 0.005 200);
+  
+  --card: oklch(0.08 0.02 240);
+  --card-foreground: oklch(0.98 0.005 200);
+  
+  --popover: oklch(0.08 0.02 240);
+  --popover-foreground: oklch(0.98 0.005 200);
+  
+  --primary: oklch(0.70 0.20 210);
+  --primary-foreground: oklch(0.03 0.01 240);
+  
+  --secondary: oklch(0.12 0.025 240);
+  --secondary-foreground: oklch(0.98 0.005 200);
+  
+  --muted: oklch(0.12 0.025 240);
+  --muted-foreground: oklch(0.60 0.05 200);
+  
+  --accent: oklch(0.75 0.18 195);
+  --accent-foreground: oklch(0.03 0.01 240);
+  
+  --destructive: oklch(0.50 0.25 15);
+  --destructive-foreground: oklch(0.98 0.005 200);
+  
+  --border: oklch(0.25 0.05 195);
+  --input: oklch(0.25 0.05 195);
+  --ring: oklch(0.70 0.20 210);
+  
+  --chart-1: oklch(0.55 0.18 210);
+  --chart-2: oklch(0.60 0.15 195);
+  --chart-3: oklch(0.50 0.12 270);
+  --chart-4: oklch(0.65 0.16 220);
+  --chart-5: oklch(0.58 0.14 240);
+  
+  --radius: 0.5rem;
+  
+  --hacker-green: #00ff41;
+  --hacker-green-bg: #001a00;
+  --hacker-green-glow: #22ff44;
+}
+
+.dark {
+  --background: oklch(0.05 0.02 240);
+  --foreground: oklch(0.97 0.005 240);
+  
+  --card: oklch(0.10 0.025 240);
+  --card-foreground: oklch(0.97 0.005 240);
+  
+  --popover: oklch(0.10 0.025 240);
+  --popover-foreground: oklch(0.97 0.005 240);
+  
+  --primary: oklch(0.75 0.18 210);
+  --primary-foreground: oklch(0.05 0.02 240);
+  
+  --secondary: oklch(0.18 0.025 240);
+  --secondary-foreground: oklch(0.97 0.005 240);
+  
+  --muted: oklch(0.18 0.025 240);
+  --muted-foreground: oklch(0.62 0.01 240);
+  
+  --accent: oklch(0.70 0.20 195);
+  --accent-foreground: oklch(0.05 0.02 240);
+  
+  --destructive: oklch(0.48 0.22 20);
+  --destructive-foreground: oklch(0.97 0.005 240);
+  
+  --border: oklch(0.22 0.04 195);
+  --input: oklch(0.22 0.04 195);
+  --ring: oklch(0.70 0.18 210);
+  
+  --chart-1: oklch(0.60 0.18 210);
+  --chart-2: oklch(0.65 0.15 195);
+  --chart-3: oklch(0.52 0.12 270);
+  --chart-4: oklch(0.68 0.16 220);
+  --chart-5: oklch(0.60 0.14 240);
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--hacker-green-bg);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* GREEN HACKER Terminal Background */
+.hacker-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #000000 0%, #001a00 50%, #000000 100%);
+  overflow: hidden;
+}
+
+/* Terminal Lines Container */
+.terminal-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--hacker-green);
+  opacity: 0.6;
+  line-height: 1.6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Terminal Line */
+.terminal-line {
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: 0 0 8px var(--hacker-green-glow);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 2px 0;
+}
+
+/* CRT Screen Effect */
+.crt-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.03) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 3px
+  );
+  box-shadow: inset 0 0 100px rgba(0, 255, 65, 0.1);
+}
+
+/* Cyber Grid Pattern */
+.cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 65, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 65, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Glow Effects */
+.glow-effect {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 65, 0.4),
+    0 0 40px rgba(0, 255, 65, 0.2),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.cyber-border {
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  position: relative;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.cyber-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 255, 65, 0.5),
+    rgba(34, 255, 68, 0.5),
+    rgba(0, 255, 65, 0.5)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.cyber-border:hover::before {
+  opacity: 1;
+}
+
+/* Neon Text Effect */
+.neon-text {
+  text-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.8),
+    0 0 20px rgba(0, 255, 65, 0.6),
+    0 0 30px rgba(0, 255, 65, 0.4),
+    0 0 40px rgba(34, 255, 68, 0.3);
+  color: #ffffff;
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 255, 65, 0.3),
+      0 0 40px rgba(0, 255, 65, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 65, 0.5),
+      0 0 60px rgba(0, 255, 65, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FF41;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22FF44;
+}
+
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #ffffff;
+}
