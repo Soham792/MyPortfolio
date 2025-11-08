@@ -245,7 +245,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground scroll-smooth relative">
+    <div className="min-h-screen bg-background text-foreground scroll-smooth relative overflow-y-auto" style={{ touchAction: 'pan-y' }}>
       <SplashCursor />
 
       {/* GREEN HACKER Terminal Background */}
@@ -367,13 +367,15 @@ export default function Portfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
-                <motion.button
-                  className="px-8 py-3 bg-[#00ff41] text-black rounded-lg font-semibold glow-effect hover:bg-[#22ff44] transition-all"
+                <motion.a
+                  href="/Soham_Marathe_Resume.pdf"
+                  download="Soham_Marathe_Resume.pdf"
+                  className="px-8 py-3 bg-[#00ff41] text-black rounded-lg font-semibold glow-effect hover:bg-[#22ff44] transition-all inline-block"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   View Resume
-                </motion.button>
+                </motion.a>
                 <motion.a
                   href="https://github.com/Soham792"
                   target="_blank"
