@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   keywords: ["Soham", "Cybersecurity", "Full Stack Developer", "Web Development", "Blockchain", "Portfolio"],
   authors: [{ name: "Soham Marathe" }],
   creator: "Soham Marathe",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -245,7 +245,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground scroll-smooth relative overflow-y-auto" style={{ touchAction: 'pan-y' }}>
+    <div className="min-h-screen bg-background text-foreground scroll-smooth relative w-full">
       <SplashCursor />
 
       {/* GREEN HACKER Terminal Background */}
@@ -260,7 +260,7 @@ export default function Portfolio() {
       <div className="cyber-grid" />
 
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full">
         {/* Navigation */}
         <motion.nav
           initial={{ y: -100 }}

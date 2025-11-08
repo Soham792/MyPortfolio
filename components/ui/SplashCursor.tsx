@@ -765,6 +765,7 @@ export default function SplashCursor() {
         left: 0,
         zIndex: 50,
         pointerEvents: 'none',
+        touchAction: 'none',
         width: '100%',
         height: '100%'
       }}
