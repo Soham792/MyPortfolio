@@ -738,7 +738,7 @@ export default function SplashCursor() {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      // Don't prevent default to allow scrolling
       const touches = e.targetTouches;
       let pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
@@ -747,13 +747,53 @@ export default function SplashCursor() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
-    updateFrame();
+    // Handle WebGL context loss to prevent animation from disappearing
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      console.warn('WebGL context lost, will attempt to restore');
+    };
+
+    const handleContextRestored = () => {
+      console.log('WebGL context restored, reinitializing...');
+      // Reinitialize the animation
+      setTimeout(() => {
+        if (canvas && gl) {
+          initFramebuffers();
+          updateFrame();
+        }
+      }, 100);
+    };
+
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored);
+
+    // Keep animation running even if there are errors
+    let animationRunning = true;
+    const safeUpdateFrame = () => {
+      if (!animationRunning) return;
+      try {
+        updateFrame();
+      } catch (error) {
+        console.error('Animation error:', error);
+        // Continue animation even after error
+        setTimeout(() => {
+          if (animationRunning) {
+            requestAnimationFrame(safeUpdateFrame);
+          }
+        }, 100);
+      }
+    };
+
+    safeUpdateFrame();
 
     return () => {
+      animationRunning = false;
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
     };
   }, []);
 

@@ -245,7 +245,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground scroll-smooth relative w-full">
+    <div className="min-h-screen bg-background text-foreground scroll-smooth relative w-full" style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch' }}>
       <SplashCursor />
 
       {/* GREEN HACKER Terminal Background */}
